@@ -1,0 +1,27 @@
+{
+  "name": "glowbugs",
+  "private": true,
+  "version": "0.9.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "zip": "vite build && node scripts/build.js",
+    "zipOld": "vite build && node scripts/buildOld.js",
+    "deploy": "node scripts/checkGit.js && npm run zip && gh-pages -d dist",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "chalk": "^6.0.0",
+    "gh-pages": "^6.3.0",
+    "google-closure-compiler": "^20260726.0.0",
+    "roadroller": "^2.1.0",
+    "terser": "^5.49.0",
+    "uglify-js": "~3.17.4",
+    "vite": "^8.2.1"
+  },
+  "littlejsMode": "vanilla",
+  "dependencies": {
+    "ect-bin": "^1.4.1"
+  }
+}
