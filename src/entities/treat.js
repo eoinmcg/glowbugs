@@ -6,7 +6,7 @@ import Sprite from "./sprite"
 export default class Treat extends Sprite {
   constructor(o = {}) {
 
-    if (!o.pos) { o.pos = randPos() }
+    if (!o.pos) { o.pos = randPos(6) }
 
     super(o.pos, vec2(6), tile(5, 8))
 

@@ -1,4 +1,4 @@
-import { W, H } from './state.js';
+import { W, H, level } from './state.js';
 import { pal } from './pal.js';
 
 export function smoke(pos, force = 2, size = 1, c = false) {
@@ -88,20 +88,17 @@ export function funkyText(str, pos = cameraPos, opts = {}) {
   });
 }
 
-
 export function bg(c = 1) {
   const NUM = 200;
-  const random = new RandomGenerator(1223);
+  const random = new RandomGenerator(level + 1);
 
-  // mainContext.fillStyle = new Color(.1, .2, .2);
   mainContext.fillStyle = pal[c].lerp(BLACK, .6)
   mainContext.beginPath();
   mainContext.rect(0, 0, W, H);
   mainContext.fill();
 
-
   for (let i = NUM; i--;) {
-    let size = random.float(3, 7);
+    let size = random.float(5, 10);
     let speed = 0;
     const extraSpace = 10;
 
@@ -118,4 +115,37 @@ export function bg(c = 1) {
   }
 
   mainContext.globalAlpha = 1;
+}
+
+export function glow() {
+  const random = new RandomGenerator(6);
+  const num = 30;
+
+  const worldWidth = mainCanvas.width / cameraScale;
+  const worldHeight = mainCanvas.height / cameraScale;
+  const worldMin = vec2(
+    cameraPos.x - worldWidth / 2,
+    cameraPos.y - worldHeight / 2
+  );
+
+  for (let i = 0; i < num; i++) {
+    const baseX = random.float(worldWidth);
+    const baseY = random.float(worldHeight);
+
+    const speed = 20 + random.float(30);
+    const phaseY = random.float(Math.PI * 2);
+
+    // Move left and wrap around
+    const x = ((baseX - time * 8) % worldWidth + worldWidth) % worldWidth;
+
+    const worldPos = vec2(
+      worldMin.x + x,
+      worldMin.y + baseY + Math.sin(time * speed * 0.05 + phaseY) * 2
+    );
+
+    for (let r = 1; r <= 4; r++) {
+      const glowColor = new Color(1, 1, .5, .5 * (1 - r / 4));
+      drawRect(worldPos, vec2(r * 1), glowColor, time);
+    }
+  }
 }

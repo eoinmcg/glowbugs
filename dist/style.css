@@ -1,9 +1,15 @@
+.sniglet {
+  font-family: "Sniglet", system-ui;
+  font-weight: 800;
+  font-style: normal;
+}
+
 body {
   color: #fff;
   margin: 0; padding: 0;
   font-size: 1.4rem;
   font-family: 'Droid Sans', Helvetica, Arial, sans-serif;
-  background-color: #036;
+  background-color: #7E2553;
   background-attachment: fixed;
   image-rendering: pixelated;
   overflow-x: hidden;
@@ -16,7 +22,7 @@ a:hover { color: #EB8931; text-decoration: none; border-color: #EB8931; }
 video { max-width: 100%; }
 
 h1 {
-  color: #ff70c5;
+  color: #FFEC27;
   text-shadow: #000 5px 5px 0;
   margin: 1rem auto;
   text-align: center; 

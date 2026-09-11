@@ -38,8 +38,15 @@ export default class Blade extends Sprite {
       o.eaten(o.pos, false)
       sparks(o.pos, 13, o.color, .5)
     }
+    if (o.name === 'treat') {
+      sparks(o.pos, 13, WHITE, .25)
+      o.destroy()
+    }
     if (o.name === 'p1') {
-      if (player.invincible > 0) return
+      if (player.invincible > 0) {
+        this.velocity = vec2(0)
+        return
+      }
       o.destroy()
       new Splash(o.pos, RED)
       new Ded(o.pos, WHITE)

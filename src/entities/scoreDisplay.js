@@ -1,4 +1,5 @@
-import { score, W } from '../state'
+import { score, hiScore, W } from '../state'
+import { pal } from '../pal';
 
 export default class ScoreDisplay extends EngineObject {
   constructor() {
@@ -10,6 +11,6 @@ export default class ScoreDisplay extends EngineObject {
   render() {
     const formattedScore = String(score).padStart(5, "0");
     const center = W / 2;
-    drawTextScreen(formattedScore, vec2(center, 40), 50, WHITE, 15, BLACK);
+    drawTextScreen(formattedScore, vec2(center, 40), 50, (score > hiScore) ? pal[13] : WHITE, 15, BLACK);
   }
 }

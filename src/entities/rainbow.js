@@ -1,12 +1,12 @@
 import { rainbow, pal } from '../pal'
-import { funkyText, sparks } from '../effects'
+import { funkyText } from '../effects'
 import {
   W, H, stats, events, sfx, updateScore, TILE_SIZE,
   setNextLevel, level,
 } from '../state'
 import { anyInput, fader } from "../lib"
 
-const SHADE = new Color(0, 0, 0, .2)
+const SHADE = new Color(0, 0, 0, .3)
 
 const stagger = (n, each, after) => {
   let i
@@ -39,7 +39,7 @@ export default class Rainbow extends EngineObject {
     const bugs = o.filter(o => o.name === 'bug')
     this.saved = bugs.filter(b => b.moveToExit)
     const remaining = bugs.length - this.saved.length
-    console.log({ bugs, saved: this.saved })
+    // console.log({ bugs, saved: this.saved })
 
     events.add(1, () => {
       sfx.score.play()
@@ -50,7 +50,6 @@ export default class Rainbow extends EngineObject {
     const treatsDelay = 1.5 + this.saved.length * .1
     events.add(treatsDelay, () => {
       sfx.score.play()
-      sparks(vec2(0, H))
       this.text.push({ label: 'Treats', rows: Math.ceil(stats.buns / 10) })
       stagger(stats.buns, () => (this.showTreats++, updateScore(10)), () => {
         this.ready = true
@@ -65,7 +64,6 @@ export default class Rainbow extends EngineObject {
   update() {
     this.grow > 100 ? (this.ready = true) : (this.grow += this.speed)
 
-    sparks(vec2(0, 0))
     const input = anyInput()
     if (this.ready && input) {
       fader(() => setNextLevel(level + 1));
@@ -81,7 +79,7 @@ export default class Rainbow extends EngineObject {
     })
 
     if (this.perfect) {
-      funkyText('NICEY!', vec2(W / 2, H - 80), { size: 80, wavy: true, cols: rainbow, outline: new Color(.2, .2, .2) })
+      funkyText('PERFECT!', vec2(W / 2, H - 80), { size: 80, wavy: true, cols: rainbow, outline: new Color(.2, .2, .2) })
     }
 
     // Draw UI Labels
@@ -96,7 +94,7 @@ export default class Rainbow extends EngineObject {
     // Render Saved Entities
     for (let i = 0; i < this.showSaved; i++) {
       const p = gridPos(i, 30)
-      drawTile(p, vec2(8), tile(13, TILE_SIZE), SHADE)
+      drawTile(p.add(vec2(0, -3)), vec2(8, 3), tile(13, TILE_SIZE), SHADE)
       drawTile(p, vec2(6), tile(14, TILE_SIZE), this.saved[i].color)
       drawTile(p, vec2(2), tile(13, TILE_SIZE))
     }
@@ -104,9 +102,8 @@ export default class Rainbow extends EngineObject {
     // Render Treats
     const savedRows = Math.ceil(this.saved.length / 10)
     for (let i = 0; i < this.showTreats; i++) {
-      drawTile(gridPos(i, 20 - savedRows * 5), vec2(6), tile(13, TILE_SIZE), SHADE)
+      drawTile(gridPos(i, 20 - savedRows * 5), vec2(6), tile(5, TILE_SIZE), pal[0])
       drawTile(gridPos(i, 20 - savedRows * 5), vec2(4), tile(5, TILE_SIZE))
     }
   }
-
 }

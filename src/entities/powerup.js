@@ -1,12 +1,14 @@
 import { TILE_SIZE, sfx, events } from "../state";
-import { sparks } from "../effects";
 import Sprite from "./sprite";
 
-export default class Power extends Sprite {
+import { sparks } from "../effects";
+import { randPos } from "../lib";
 
-  constructor(o) {
+export default class Powerup extends Sprite {
 
-    super(o.pos, vec2(8), tile(6, TILE_SIZE))
+  constructor() {
+
+    super(randPos(5, 8), vec2(8), tile(6, TILE_SIZE))
     this.name = 'powerup'
     sfx.powerup.play()
     this.mass = 0

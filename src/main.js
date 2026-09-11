@@ -23,29 +23,28 @@ import Exit from "./entities/exit";
 import Alert from "./entities/alert";
 import ScoreDisplay from './entities/scoreDisplay';
 import { rainbow, pal } from "./pal.js";
-import { funkyText, bg, smoke } from './effects.js';
+import { funkyText, bg, glow, smoke } from './effects.js';
 import { tune } from "./tune";
-import { anyInput, createWalls, fader, randPos } from "./lib"
+import { anyInput, createWalls, fader } from "./lib"
 import { initSfx } from './sfx.js';
 
 import { levels } from './levels.js';
 
 tileFixBleedScale = 0.5
+// setShowWatermark(false)
 
 const SPAWN_TYPES = [Baddie, Bug, Blade, Block, Poop, Treat, Powerup];
-
-let plays = -1, splashInit, levelData;
+let plays = -1, splashInit, levelData, bgColor;
 
 const startGame = () => {
-
   if (!level) plays++
   if (plays === 1) levels.shift()
   levelData = levels[level];
   if (!levelData) { levelData = levels[levels.length - 1] }
 
+
   setGameOver(false);
   resetStats()
-
   events.length = 0;
 
   // Clean engine objects and check for an existing score display in a single pass
@@ -55,6 +54,17 @@ const startGame = () => {
     else if (o.name != 'p1') o.destroy();
   });
   if (!hasScore) new ScoreDisplay();
+
+  bgColor = plays === 0 ? 2 : randInt(4)
+  levelData.freq ??= .991
+  levelData.target ??= 5
+
+  console.log({ level, plays })
+
+  if (level > 3) {
+    console.log('adding powerup')
+    events.add(rand(10, 20), () => { new Powerup() })
+  }
 
   setExit(null);
   if (!player) {
@@ -68,10 +78,10 @@ const startGame = () => {
     events.add(entry?.time || 0, () => new SPAWN_TYPES[entry.type](entry));
   }
 
+  console.log({ level, plays })
+
   let i = levelData.treats || 0
-  while (i--) {
-    new Treat()
-  }
+  while (i--) { new Treat() }
 
   createWalls(...levelData.walls);
   playMusic(tune, true, 120);
@@ -155,11 +165,11 @@ function gameUpdate() {
   if (newBest) { clearNewBest(); new Alert('New HiScore!', pal[13], pal[7]); sfx.hi.play() }
 
   if (player.bugs.length >= levelData.target && !exit) {
-    setExit(new Exit(levelData.exit, player));
+    setExit(new Exit(levelData?.exit));
     setTempo(180)
   }
 
-  if (!levelData.tutorial && !exit && rand() > levelData.treat.freq) {
+  if (!levelData.tutorial && !exit && rand() > levelData.freq) {
     new Treat();
   }
 }
@@ -169,9 +179,9 @@ function gameRender() {
 
   // Render Title Screen
   if (level < 0) {
-    drawCircle(vec2(0), 110, pal[1]);
+    drawCircle(vec2(0), 110, pal[1].lerp(BLACK, .5));
     const y = splashInit ? (time - splashInit) * -500 : 0;
-    funkyText(TITLE, vec2(center, (H * .5) + y), { size: 140, wavy: true, cols: rainbow, outline: new Color(.2, .2, .2) });
+    funkyText(TITLE, vec2(center, (H * .5) + y), { size: 140, wavy: true, cols: rainbow, outline: BLACK });
 
     const x = splashInit ? (time - splashInit) * 200 : 0;
     if (x) {
@@ -182,7 +192,8 @@ function gameRender() {
 
 
     if (!splashInit) {
-      drawTextScreen("HI: " + hiScore, vec2(center, H * .1), 50, WHITE, 15, pal[0]);
+      glow()
+      drawTextScreen("HI: " + hiScore, vec2(center, H * .1), 50, WHITE, 15, BLACK);
       // if (rand() > .9) sparks(vec2(rand(-40, 40), 0), 7, WHITE)
       if (Math.sin(time * 5) > 0) {
         // drawTextScreen("READY?", vec2(center, H * .905), 36, BLACK);
@@ -193,7 +204,7 @@ function gameRender() {
   }
 
   // Render Active Level
-  if (levelData) bg(levelData.bg);
+  if (levelData) bg(bgColor);
 
   if (player && !player.exit) {
     const progressW = 100;

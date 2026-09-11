@@ -2,9 +2,7 @@
 export const levels = [
   {
     exit: vec2(),
-    bg: 1,
     target: 1,
-    treat: { freq: .991, },
     walls: [],
     tutorial: true,
     spawns: [
@@ -13,32 +11,55 @@ export const levels = [
     ]
   },
   {
-    exit: vec2(),
-    bg: 2,
-    target: 5,
-    treat: { freq: .991, },
+    // target: 5,
     walls: [90, 50, 20, 3],
     treats: 4,
     spawns: [
-      { time: 20, type: 6, pos: vec2(50, 40) },
       { type: 0, pos: vec2(-20, 20) },
-      { type: 0, pos: vec2(20, 20) },
     ],
   },
   {
-    exit: vec2(),
-    bg: 3,
-    target: 5,
-    treat: { freq: .991, },
+    // target: 5,
     walls: [90, 50, 20, 2],
     spawns: [
       { type: 2, pos: vec2(-50, 0) },
       { type: 0, pos: vec2(20, 20) },
     ],
   },
+  {
+    // target: 5,
+    walls: [90, 50, 20, 2],
+    treats: 5,
+    spawns: [
+      { type: 2, pos: vec2(-50, 0) },
+      { type: 2, pos: vec2(50, 0) },
+      { type: 0, pos: vec2(20, 20) },
+    ],
+  },
+  {
+    // target: 5,
+    // treat: { freq: .991, },
+    walls: [90, 50, 20],
+    spawns: [
+      { type: 0, pos: vec2(-20, -20) },
+      { type: 2, pos: vec2(-50, 0), v: vec2(0, .2) },
+      { type: 2, pos: vec2(50, 0), v: vec2(0, -.2) },
+    ],
+  },
+  {
+    // target: 5,
+    // treat: { freq: .991, },
+    walls: [90, 50, 20, 1],
+    treats: 5,
+    spawns: [
+      { type: 0, pos: vec2(-20, -20) },
+      { type: 0, pos: vec2(-0, -20) },
+      { type: 2, pos: vec2(-50, 0), v: vec2(0, .2) },
+      { type: 2, pos: vec2(50, 0), v: vec2(0, -.2) },
+    ],
+  },
 ];
 
-// 0 = Baddie, 1 = Bug, 2 = Blade, 3 = Block, 4 = Poop, 5 = Treat
 // const tutorial = {
 //   exit: vec2(),
 //   bg: 1,

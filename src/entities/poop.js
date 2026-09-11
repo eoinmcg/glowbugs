@@ -25,12 +25,12 @@ export default class Poop extends Sprite {
     const dir = player.pos.subtract(this.pos);
 
     // 1. Exit Mode: Follow player continuously and slowly
-    if (exit) {
-      if (dir.lengthSquared() > 0.0001) {
-        this.pos = this.pos.add(dir.normalize().scale(timeDelta * 6));
-      }
-      return;
-    }
+    // if (exit) {
+    //   if (dir.lengthSquared() > 0.0001) {
+    //     this.pos = this.pos.add(dir.normalize().scale(timeDelta * 6));
+    //   }
+    //   return;
+    // }
 
     // 2. Hopping State Machine
     if (this.hopElapsed > 0) {
@@ -58,6 +58,8 @@ export default class Poop extends Sprite {
   }
 
   render() {
+    if (!player || player.exit) return;
+
     // Squish animation
     const squish = Math.sin(time * 9) * 0.5;
     this.size = vec2(5 - squish, 5 + squish);

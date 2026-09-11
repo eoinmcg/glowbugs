@@ -1,18 +1,16 @@
 import { SCREENX, SCREENY } from "./state";
 import Block from "./entities/block";
 
-
 export const randPos = (off = 5, size = vec2(1)) => {
-  let pos, hit;
+  let pos, hit, tries = 20;
   do {
     pos = vec2(
       ~~rand(-SCREENX + off, SCREENX - off),
       ~~rand(-SCREENY + off, SCREENY - off)
     );
-    hit = 0;
-    // Check overlap against all solid engine objects
-    engineObjectsCallback(pos, size, o => hit = o.solid);
-  } while (hit);
+    hit = false;
+    engineObjectsCallback(pos, size, o => hit = hit || o.solid);
+  } while (hit && --tries);
 
   return pos;
 };

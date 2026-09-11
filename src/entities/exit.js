@@ -1,14 +1,13 @@
-import { sfx } from "../state";
+import { sfx, player, SCREENX, SCREENY } from "../state";
 import { rainbow } from "../pal";
 import { sparks } from "../effects";
 
 export default class Exit extends EngineObject {
-  constructor(pos = vec2(0), player) {
+  constructor(pos = vec2(randSign() * SCREENX * .8, randSign() * SCREENY * .7)) {
     super(pos, vec2(8));
     this.name = 'exit'
     this.setCollision();
     this.mass = 0
-    this.player = player
     sfx.open.play()
 
     rainbow.forEach((col) => {
@@ -39,7 +38,7 @@ export default class Exit extends EngineObject {
       drawTile(this.pos, drawSize, tile(13, 8), color, this.angle);
     }
 
-    if (this.player.exit) return
+    if (!player || player.exit) return
 
     const flash = Math.sin(time * 5);
     drawText('EXIT', this.pos.add(vec2(0, 7 + flash)), 5, rainbow[offset % len])

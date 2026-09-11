@@ -25,7 +25,7 @@ unicorns and poop. Lots of poop.
 
 Dark forces have sucked the colors from our world.
 Everything is dull and gray.
-You, Uma the Unicorn, must save the day.
+You, Una the Unicorn, must save the day.
 Collect glowbugs to re-ignite the rainbow.
 
 ## How To Play
