@@ -12,6 +12,15 @@ export const levels = [
   },
   {
     walls: [90, 50, 20, 3],
+    spawns: [
+      { type: 4, pos: vec2(40, 40) },
+      { type: 4, pos: vec2(-40, 40) },
+      { type: 4, pos: vec2(40, -40) },
+      { type: 4, pos: vec2(-40, -40) },
+    ],
+  },
+  {
+    walls: [90, 50, 20, 3],
     treats: 4,
     spawns: [
       { type: 0, pos: vec2(-20, 20) },
