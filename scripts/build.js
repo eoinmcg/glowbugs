@@ -119,6 +119,11 @@ try {
   buildSteps.push(htmlBuildStep, zipBuildStep);
 
   Build(`${BUILD_FOLDER}/index.js`, sourceFiles, buildSteps);
+
+  // move to /dist and remove /build
+  fs.copyFileSync('build/index.html', 'dist/index.html');
+  fs.rmSync('dist/game.js', { force: true });
+  fs.rmSync(BUILD_FOLDER, { recursive: true, force: true });
 }
 catch (e) { handleError(e, 'Build failed!'); }
 

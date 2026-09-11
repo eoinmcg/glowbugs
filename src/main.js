@@ -26,7 +26,7 @@ import { rainbow, pal } from "./pal.js";
 import { funkyText, bg, smoke } from './effects.js';
 import { tune } from "./tune";
 import { anyInput, createWalls, fader, randPos } from "./lib"
-import { sfxData } from './sfx.js';
+import { initSfx } from './sfx.js';
 
 import { levels } from './levels.js';
 
@@ -85,7 +85,7 @@ function gameInit() {
   setCameraScale(TILE_SIZE);
 
   document.title = TITLE;
-  for (let k in sfxData) sfx[k] = new Sound(sfxData[k]);
+  initSfx()
 
   // Favicon generator
   const c = document.createElement('canvas'), ctx = c.getContext('2d');
@@ -182,7 +182,6 @@ function gameRender() {
 
 
     if (!splashInit) {
-      console.log({ hiScore })
       drawTextScreen("HI: " + hiScore, vec2(center, H * .1), 50, WHITE, 15, pal[0]);
       // if (rand() > .9) sparks(vec2(rand(-40, 40), 0), 7, WHITE)
       if (Math.sin(time * 5) > 0) {

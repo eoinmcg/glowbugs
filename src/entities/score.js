@@ -1,12 +1,12 @@
 import { updateScore, sfx } from '../state.js'
 
 export default class Score extends EngineObject {
-  constructor(pos, score, sound = 'score') {
-    super(pos.add(vec2(0, 2))); // Offsets Y during instantiation
+  constructor(pos, score, sound = sfx.score) {
+    super(pos.add(vec2(0, 2)));
     this.text = '+' + score;
-    this.a = 1; // Alpha tracker
+    this.a = 1;
     updateScore(score);
-    sfx[sound].play();
+    sound.play();
   }
 
   update() {

@@ -131,7 +131,7 @@ export default class Player extends Sprite {
       if (this.invincible > 0) {
         o.destroy()
         sparks(this.pos, 13, pal[3], .5)
-        new Score(o.pos, 40, 'hit')
+        new Score(o.pos, 40, sfx.hit)
         return
       }
       o.destroy()
@@ -150,7 +150,7 @@ export default class Player extends Sprite {
         o.followTarget = this
         o.gracePeriod = .3
         this.bugs.push(o)
-        new Score(o.pos, 20, 'pickup')
+        new Score(o.pos, 20, sfx.pickup)
         sparks(o.pos, 7, o.color, 0.2)
       } else if (o.followTarget && o.gracePeriod < 0.01 && this.bugs[0] !== o) {
         this.breakChainAt(o, { eaten: false })
