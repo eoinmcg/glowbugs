@@ -34,14 +34,16 @@ tileFixBleedScale = 0.5
 // setShowWatermark(false)
 
 const SPAWN_TYPES = [Baddie, Bug, Blade, Block, Poop, Treat, Powerup];
-let plays = -1, splashInit, levelData, bgColor;
+let plays = -1, splashInit, levelData, bgColor, tutorialCut;
 
 const startGame = () => {
-  if (!level) plays++
-  if (plays === 1) levels.shift()
+  plays++
+  if (!level && plays > 0 && !tutorialCut) {
+    levels.shift()
+    tutorialCut = true
+  }
   levelData = levels[level];
   if (!levelData) { levelData = levels[levels.length - 1] }
-
 
   setGameOver(false);
   resetStats()
@@ -59,11 +61,9 @@ const startGame = () => {
   levelData.freq ??= .991
   levelData.target ??= 5
 
-  console.log({ level, plays })
 
-  if (level > 3) {
-    console.log('adding powerup')
-    events.add(rand(10, 20), () => { new Powerup() })
+  if (level > 2) {
+    events.add(rand(20, 40), () => { new Powerup() })
   }
 
   setExit(null);
@@ -77,8 +77,6 @@ const startGame = () => {
   for (const entry of levelData.spawns) {
     events.add(entry?.time || 0, () => new SPAWN_TYPES[entry.type](entry));
   }
-
-  console.log({ level, plays })
 
   let i = levelData.treats || 0
   while (i--) { new Treat() }

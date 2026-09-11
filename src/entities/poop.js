@@ -58,8 +58,6 @@ export default class Poop extends Sprite {
   }
 
   render() {
-    if (!player || player.exit) return;
-
     // Squish animation
     const squish = Math.sin(time * 9) * 0.5;
     this.size = vec2(5 - squish, 5 + squish);

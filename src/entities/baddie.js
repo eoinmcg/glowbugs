@@ -66,7 +66,7 @@ export default class Baddie extends Sprite {
   }
 
   render() {
-    if (!player || player.exit) return;
+
     super.render()
     if (this.eating) {
       const size = rand() > .9 ? vec2(1, 2) : vec2(2, 1)

@@ -11,7 +11,6 @@ export const levels = [
     ]
   },
   {
-    // target: 5,
     walls: [90, 50, 20, 3],
     treats: 4,
     spawns: [
@@ -19,7 +18,6 @@ export const levels = [
     ],
   },
   {
-    // target: 5,
     walls: [90, 50, 20, 2],
     spawns: [
       { type: 2, pos: vec2(-50, 0) },
@@ -27,18 +25,15 @@ export const levels = [
     ],
   },
   {
-    // target: 5,
     walls: [90, 50, 20, 2],
     treats: 5,
     spawns: [
-      { type: 2, pos: vec2(-50, 0) },
+      { type: 2, pos: vec2(-50, 0), size: 6, v: vec2(.1, .1) },
       { type: 2, pos: vec2(50, 0) },
       { type: 0, pos: vec2(20, 20) },
     ],
   },
   {
-    // target: 5,
-    // treat: { freq: .991, },
     walls: [90, 50, 20],
     spawns: [
       { type: 0, pos: vec2(-20, -20) },
@@ -47,8 +42,6 @@ export const levels = [
     ],
   },
   {
-    // target: 5,
-    // treat: { freq: .991, },
     walls: [90, 50, 20, 1],
     treats: 5,
     spawns: [

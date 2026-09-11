@@ -6,7 +6,7 @@ import { player } from "../state"
 
 export default class Blade extends Sprite {
   constructor(o) {
-    super(o.pos, vec2(8), tile(15, 8));
+    super(o.pos, vec2(o.size || 8), tile(15, 8));
     this.name = 'blade';
 
     this.velocity = o.v || vec2(0)
