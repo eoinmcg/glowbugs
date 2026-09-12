@@ -35,6 +35,7 @@ export default class Blade extends Sprite {
   collideWithObject(o) {
 
     if (o.name === 'bug' && !player.exit) {
+      if (o.followTarget && player && player.invincible > 0) { return }
       o.eaten(o.pos, false)
       sparks(o.pos, 13, o.color, .5)
     }

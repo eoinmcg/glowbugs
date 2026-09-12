@@ -2,7 +2,8 @@ import {
   TITLE, W, H, TILE_SIZE,
   SCREENX, SCREENY,
   sfx, gameOver, setGameOver,
-  playMusic, setTempo, events,
+  playMusic, setTempo,
+  events, resetEvents,
   player, setPlayer,
   newBest, clearNewBest, resetScore, hiScore,
   resetStats,
@@ -42,12 +43,13 @@ const startGame = () => {
     levels.shift()
     tutorialCut = true
   }
-  levelData = levels[level];
-  if (!levelData) { levelData = levels[levels.length - 1] }
+  // levelData = levels[level];
+  // if (!levelData) { levelData = levels[levels.length - 1] }
+  levelData = levels[level] || levels[levels.length - 1 - randInt(3)];
 
   setGameOver(false);
   resetStats()
-  events.length = 0;
+  resetEvents()
 
   // Clean engine objects and check for an existing score display in a single pass
   let hasScore = false;

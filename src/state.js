@@ -26,6 +26,7 @@ export let nextLevel = -1;
 export const setNextLevel = (lvl) => nextLevel = lvl;
 
 export let events = new TimerSystem();
+export const resetEvents = () => events = new TimerSystem()
 
 // Game State
 export let score = 0;

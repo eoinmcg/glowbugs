@@ -10,17 +10,19 @@ export const levels = [
       { type: 5, pos: vec2(-50, 0) },
     ]
   },
+  // {
+  //   walls: [90, 50, 20, 3],
+  //   target: 3,
+  //   spawns: [
+  //     { type: 4, pos: vec2(40, 40) },
+  //     // { type: 4, pos: vec2(-40, 40) },
+  //     // { type: 4, pos: vec2(40, -40) },
+  //     { type: 4, pos: vec2(-40, -40) },
+  //   ],
+  // },
   {
     walls: [90, 50, 20, 3],
-    spawns: [
-      { type: 4, pos: vec2(40, 40) },
-      { type: 4, pos: vec2(-40, 40) },
-      { type: 4, pos: vec2(40, -40) },
-      { type: 4, pos: vec2(-40, -40) },
-    ],
-  },
-  {
-    walls: [90, 50, 20, 3],
+    target: 4,
     treats: 4,
     spawns: [
       { type: 0, pos: vec2(-20, 20) },
@@ -37,9 +39,18 @@ export const levels = [
     walls: [90, 50, 20, 2],
     treats: 5,
     spawns: [
-      { type: 2, pos: vec2(-50, 0), size: 6, v: vec2(.1, .1) },
-      { type: 2, pos: vec2(50, 0) },
+      // { type: 2, pos: vec2(-50, 0), size: 6, v: vec2(.1, .1) },
+      { type: 2, pos: vec2(-60, 0) },
+      { type: 2, pos: vec2(60, 0) },
       { type: 0, pos: vec2(20, 20) },
+    ],
+  },
+  {
+    walls: [90, 50, 20, 3],
+    treats: 5,
+    spawns: [
+      { type: 2, pos: vec2(-50, 0), size: 6, v: vec2(.1, .1) },
+      { type: 2, pos: vec2(50, 0), size: 6, v: vec2(-.1, -.1) },
     ],
   },
   {
@@ -55,46 +66,11 @@ export const levels = [
     treats: 5,
     spawns: [
       { type: 0, pos: vec2(-20, -20) },
-      { type: 0, pos: vec2(-0, -20) },
+      // { type: 0, pos: vec2(-0, -20) },
       { type: 2, pos: vec2(-50, 0), v: vec2(0, .2) },
+      { type: 2, pos: vec2(-50, 0), size: 6, v: vec2(.1, .1) },
+      { type: 2, pos: vec2(50, 0), size: 6, v: vec2(-.1, -.1) },
       { type: 2, pos: vec2(50, 0), v: vec2(0, -.2) },
     ],
   },
 ];
-
-// const tutorial = {
-//   exit: vec2(),
-//   bg: 1,
-//   target: 1,
-//   treat: { freq: .991 },
-//   walls: [],
-//   spawns: [
-//     { type: 5, pos: vec2(50, 0) },
-//     { type: 5, pos: vec2(-50, 0) },
-//   ]
-// }
-//
-// const rndPos = (pad = 15) => vec2(rand(-50 + pad, 50 - pad), rand(-30 + pad, 30 - pad))
-//
-// const genLevel = n => {
-//   const baddies = Math.min(1 + (n / 2 | 0), 6)
-//   const blades = Math.min(n / 3 | 0, 4)
-//   const blocks = Math.max(0, Math.min((n - 3) / 2 | 0, 5))
-//
-//   const spawns = []
-//   for (let i = 0; i < baddies; i++) spawns.push({ type: 0, pos: rndPos() })
-//   for (let i = 0; i < blades; i++) spawns.push({ type: 2, pos: rndPos(), v: vec2(rand(-.2, .2), rand(-.2, .2)) })
-//   for (let i = 0; i < blocks; i++) spawns.push({ type: 3, pos: rndPos() })
-//
-//   return {
-//     exit: vec2(),
-//     bg: (n % 3) + 1,
-//     target: Math.min(3 + n, 15),
-//     treat: { freq: Math.min(.995, .991 + n * .0007) },
-//     walls: [],
-//     spawns
-//   }
-// }
-//
-// const LEVEL_COUNT = 15
-// export const levels = [tutorial, ...Array.from({ length: LEVEL_COUNT }, (_, i) => genLevel(i + 1))]

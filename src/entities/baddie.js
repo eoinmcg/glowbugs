@@ -77,6 +77,7 @@ export default class Baddie extends Sprite {
   collideWithObject(o) {
     if (this.eating || !player || player.exit) return;
     if (o.name === 'p1' && player.invincible > 0) return
+    if (o.name === 'bug' && o.followTarget && player && player.invincible > 0) { return }
     if (o.name === 'treat') {
       o.destroy()
       sparks(this.pos, 12, pal[14])
