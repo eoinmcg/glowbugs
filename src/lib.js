@@ -16,9 +16,8 @@ export const randPos = (off = 5, size = vec2(1)) => {
 };
 
 let anyKeyDown = false;
-addEventListener('keydown', () => anyKeyDown = true);
-
 addEventListener('keydown', e => { if (!e.repeat) anyKeyDown = true });
+addEventListener('touchstart', () => anyKeyDown = true);
 
 export const anyInput = () => {
   const hit = anyKeyDown || mouseWasPressed(0) || gamepadWasPressed(1);

@@ -85,7 +85,8 @@ const startGame = () => {
 
   createWalls(...levelData.walls);
   playMusic(tune, true, 120);
-  new Alert(level === 0 ? `` : `Wave ${level}`);
+  const intro = ('ontouchstart' in window) ? 'Swipe to move' : 'WASD or cursors'
+  new Alert(plays === 0 ? intro : `Wave ${level + 1}`);
 };
 
 function gameInit() {
