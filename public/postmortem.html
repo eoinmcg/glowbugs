@@ -28,17 +28,111 @@
 <h2> A Post Mortem </h2>
 
 
-<h3 class="sniglet"> Coming Soon.. </h3>
-
+<h3 class="sniglet"> Theme</h3>
       <p>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+        August 13th 2026 #js13k theme was announced to much anticipation.
+      </p>
+      <p>
+        What would follow <em>Black Cat</em>, <em>Triskaidekaphobia</em>, <em>13th Century</em> and <em>Death</em>?
+      </p>
+      <p>
+        Errmm... <em>Rainbows and Unicorns.</em> 🤷 Ok, let's get to it!
       </p>
 
-<hr />
+      <hr />
+
+<h3 class="sniglet"> Ideas</h3>
+      <p>
+        Recently, I've been marvelling at the <a href="https://50games.fun/">UF0 50</a> collection.
+        Boasting an impressive range of games that, at first, 
+        seem simple only to reveal hidden 
+        depths after a few plays. A masterclass in game design.
+        Magic Garden, in particular, drew me in with it's quirky blend
+        of snake and pacman.
+      </p>
+      <p>
+        Another source of inspiration has been <a href="https://adamatomic.itch.io/kolydr">KOLYDR</a>.
+        Beautifully simplistic and super addictive. A delicous balance of risk and reward.
+      </p>
+      <hr />
+
+<h3 class="sniglet"> Engine</h3>
+      <p>
+        Following on <a href="https://js13kgames.com/2025/games/kleptokitty">last year's effort</a> I reached for the tried and tested
+        <a href="https://github.com/KilledByAPixel/LittleJS">LittleJS</a>.
+        The more I use it the more I appreciate just how great it is;
+        comprehensive documentation, buttery smooth performance and a very well thought out API.
+        Among other cool things particles, tilemaps, webgl, vectors are all included.
+      </p>
+
+      <p></p>
+
+      <hr />
+
+<h3 class="sniglet">The crunch</h3>
+      <p>This year problems were of a time nature rather than technical. 
+        August had long slipped out the backdoor and September was threatening to go the same way.
+        By the time 9th Sept rolled around, I hadn't yet started. Oops!
+        Well, what's better than a tight deadline to get things done?
+        </p>
+
+      <p>With some vague idea of a Magic Garden / KOLYDR riff, I pushed some pixels:</p>
+      <img src="https://raw.githubusercontent.com/eoinmcg/glowbugs/main/promo/tileset.png" title="screenshot"">
+
+      <p>
+        Early attempts revolved around the player tapping / clicking to move the player on screen.
+        This nicely sidesteps any need for clunky mobile controls. Unfortunately, in practice
+        it just got too confusing as the screen filled up and a hovering finger covered
+        vital elements.
+      </p>
+
+      <p>
+        Replacing this with basic WASD / cursors or swipe on mobile improved the playing experience.
+        As an extra bonus, LittleJS provides solid joypad support out of the box.
+      </p>
+
+      <hr />
+
+<h3 class="sniglet"> The LLM in the room</h3>
+      <p>
+        The development landscape has changed seismically in the past couple of years.
+        It can no longer be disputed that AI turbo charges development. This often comes at
+        a cost, though. Particularly when vibecoding; quick inital results leading to a
+        tangled mess of spaghetti.
+      </p>
+
+      <p>
+        Wary, of this I just banged out caffeine fuelled lines of code. As the deadline loomed
+        and the byte budget receeded I did run some classes through gemini and claude to look
+        for optimizations. Undoubtedly, this saved some space but allowed me to retain a mental
+        map of the code which is a massive benefit for making quick changes and tweaks.
+      </p>
+
+      <hr />
+
+<h3 class="sniglet">Music</h3>
+      <p>All SFX were created with <a href="https://github.com/KilledByAPixel/ZzFX">ZzFX</a></p>
+      <p>
+        Music (if you can call it that) was made possible by <a href="https://github.com/keithclark/ZzFXM">ZzFXM</a>
+      </p>
+
+
+      <hr />
+
+<h3 class="sniglet">Wrapping up</h3>
+      <p>
+        As always, the js13k jam is awesome; I love the constraints and seeing what
+        great games other participants cook up.
+      </p>
+
+      <p>
+        My only reget, this year, is not spending more time on my entry. While not
+        unhappy with Glowbugs I think some more variety and tweaks would have vastly
+        improved the game. Ah well, there is always next year!
+      </p>
+
+
+      <hr />
 
 <p>
 If you've got this far, thanks and what are you waiting for?
@@ -64,6 +158,8 @@ Go play the game
 </p>
 
 	
+      <img src="https://raw.githubusercontent.com/eoinmcg/glowbugs/main/promo/title.png" title="title screen"">
+      <img src="https://raw.githubusercontent.com/eoinmcg/glowbugs/main/promo/gameplay.png" title="gameplay"">
 </div>
 
 
@@ -93,10 +189,62 @@ Go play the game
 // document.body.className = 'loading';
 document.addEventListener("DOMContentLoaded", (event) => {
   generateGridPattern();
+  funkyText(document.querySelector('h1'))
+  document.querySelectorAll('h3').forEach((el) => {
+    rainbowText(el)
+  })
   document.querySelectorAll('#arcade a').forEach((link) => {
     link.setAttribute('target', '_blank');
   });
 });
+
+function rainbowText(el) {
+  const cols = ['red', 'orange', 'yellow', 'green', 'blue']
+
+  const orig = el.textContent.trim().split('')
+  let html = ''
+
+  orig.forEach((letter, i) => {
+    html += `<span class="${cols[i % cols.length]}">${letter}</span>`
+  })
+
+  el.innerHTML = html
+
+}
+
+function funkyText(el) {
+  const cols = ['red', 'orange', 'yellow', 'green', 'blue']
+
+  const orig = el.textContent.trim().split('')
+  let html = ''
+
+  orig.forEach((letter, i) => {
+    html += `<span class="${cols[i % cols.length]}">${letter}</span>`
+  })
+
+  el.innerHTML = html
+
+  const chars = [...el.children]
+
+  const start = performance.now()
+  const speed = 0.004
+  const amplitude = 8
+  const delay = 0.25
+
+  function animate(time) {
+    const t = time - start
+
+    chars.forEach((char, i) => {
+      const y = Math.sin(t * speed - i * delay) * amplitude
+      char.style.position = 'relative'
+      char.style.top = `${y}px`
+    })
+
+    requestAnimationFrame(animate)
+  }
+
+  requestAnimationFrame(animate)
+}
 
 function generateGridPattern() {
     const canvas = document.createElement('canvas');
