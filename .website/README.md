@@ -26,4 +26,8 @@ Swipe / Arrow keys / WASD / Gamepad
 
 -----
 
+### [Wavedash entry](https://wavedash.com/games/glowbugs)
+
+-----
+
 - [Made with LittleJS](https://github.com/KilledByAPixel/LittleJS)
