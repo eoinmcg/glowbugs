@@ -43,16 +43,16 @@
 
 <h3 class="sniglet"> Ideas</h3>
       <p>
-        Recently, I've been marvelling at the <a href="https://50games.fun/">UF0 50</a> collection.
+        Recently, I've been marvelling at the <a href="https://50games.fun/">UFO 50</a> collection.
         Boasting an impressive range of games that, at first, 
         seem simple only to reveal hidden 
         depths after a few plays. A masterclass in game design.
-        Magic Garden, in particular, drew me in with it's quirky blend
+        Magic Garden, in particular, drew me in with its quirky blend
         of snake and pacman.
       </p>
       <p>
         Another source of inspiration has been <a href="https://adamatomic.itch.io/kolydr">KOLYDR</a>.
-        Beautifully simplistic and super addictive. A delicous balance of risk and reward.
+        Beautifully simplistic and super addictive. A delicious balance of risk and reward.
       </p>
       <hr />
 
@@ -97,13 +97,13 @@
       <p>
         The development landscape has changed seismically in the past couple of years.
         It can no longer be disputed that AI turbo charges development. This often comes at
-        a cost, though. Particularly when vibecoding; quick inital results leading to a
+        a cost, though. Particularly when vibecoding; quick initial results leading to a
         tangled mess of spaghetti.
       </p>
 
       <p>
         Wary, of this I just banged out caffeine fuelled lines of code. As the deadline loomed
-        and the byte budget receeded I did run some classes through gemini and claude to look
+        and the byte budget receded I did run some classes through gemini and claude to look
         for optimizations. Undoubtedly, this saved some space but allowed me to retain a mental
         map of the code which is a massive benefit for making quick changes and tweaks.
       </p>
@@ -126,7 +126,7 @@
       </p>
 
       <p>
-        My only reget, this year, is not spending more time on my entry. While not
+        My only regret, this year, is not spending more time on my entry. While not
         unhappy with Glowbugs I think some more variety and tweaks would have vastly
         improved the game. Ah well, there is always next year!
       </p>
@@ -238,6 +238,9 @@ function funkyText(el) {
       const y = Math.sin(t * speed - i * delay) * amplitude
       char.style.position = 'relative'
       char.style.top = `${y}px`
+
+      const colorIndex = Math.floor(t * .003 + i) % cols.length
+      char.className = cols[colorIndex]
     })
 
     requestAnimationFrame(animate)
