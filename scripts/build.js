@@ -63,7 +63,6 @@ const pkg = JSON.parse(fs.readFileSync("./package.json", "utf8"));
 const mode = pkg.littlejsMode || "vanilla";
 
 
-const PROGRAM_TITLE = TITLE;
 const PROGRAM_NAME = 'game';
 const BUILD_FOLDER = 'build';
 const SIZE_LIMIT = 13312; // JS13K limit in bytes
@@ -123,7 +122,7 @@ try {
   // move to /dist and remove /build
   fs.copyFileSync('build/index.html', 'dist/index.html');
   fs.rmSync('dist/game.js', { force: true });
-  fs.rmSync(BUILD_FOLDER, { recursive: true, force: true });
+  // fs.rmSync(BUILD_FOLDER, { recursive: true, force: true });
 }
 catch (e) { handleError(e, 'Build failed!'); }
 

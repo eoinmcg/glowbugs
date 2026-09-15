@@ -71,7 +71,7 @@ export function funkyText(str, pos = cameraPos, opts = {}) {
     const y = opts.wavy ? individualWave * 20 : 0;
 
     const charPos = pos.add(vec2(x + width / 2, y));
-    const colorSpeed = 5;
+    const colorSpeed = 0;
     const col = cols[Math.floor(time * colorSpeed + i) % cols.length];
 
     drawTextScreen(

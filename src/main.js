@@ -31,7 +31,9 @@ import { initSfx } from './sfx.js';
 
 import { levels } from './levels.js';
 
-tileFixBleedScale = 0.5
+import Wavedash from "@wvdsh/sdk-js";
+
+tileFixBleedScale = .5
 // setShowWatermark(false)
 
 const SPAWN_TYPES = [Baddie, Bug, Blade, Block, Poop, Treat, Powerup];
@@ -90,6 +92,7 @@ const startGame = () => {
 };
 
 function gameInit() {
+
   const size = vec2(W, H);
   setCanvasFixedSize(size);
   setCanvasMaxSize(size);
@@ -114,6 +117,10 @@ function gameInit() {
   } else {
     setLevel(-1)
   }
+
+  Wavedash.updateLoadProgressZeroToOne(1);
+  Wavedash.loadComplete(0);
+  Wavedash.init({ debug: true });
 }
 
 function gameUpdate() {
